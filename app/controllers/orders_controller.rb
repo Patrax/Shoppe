@@ -10,6 +10,10 @@ class OrdersController < ApplicationController
   end
   
   def payment
+    if params[:success] == "true" && params[:PayerID].present?
+      @order.accept_paypal_payment(params[:paymentId], params[:token], params[:PayerID])
+    end
+    
     if request.post?
       redirect_to checkout_confirmation_path
     end
