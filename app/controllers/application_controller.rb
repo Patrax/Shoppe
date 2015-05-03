@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   helper_method :current_user, :logged_in?
+  helper_method :current_order, :has_order?
   
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -23,5 +24,26 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+ 
+ private
+ 
+    def current_order
+      @current_order ||= begin
+        if has_order?
+          @current_order
+        else
+          order = Shoppe::Order.create(:ip_address => request.ip)
+          session[:order_id] = order.id
+          order
+        end
+      end
+    end
+  
+    def has_order?
+      !!(
+        session[:order_id] &&
+        @current_order = Shoppe::Order.includes(:order_items => :ordered_item).find_by_id(session[:order_id])
+      )
+    end
   
 end

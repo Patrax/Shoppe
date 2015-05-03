@@ -231,6 +231,7 @@ DEPENDENCIES
   rails (= 4.1.7)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  shoppe (~> 1.0.5)
   shoppe-paypal
   spring
   sqlite3
