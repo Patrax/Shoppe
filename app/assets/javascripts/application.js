@@ -16,4 +16,5 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+//= require shoppe/stripe/form_handler
 

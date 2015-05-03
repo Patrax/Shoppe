@@ -1,11 +1,6 @@
-<%= render 'shared/page_title', title: "Make your payment" %>
-
-<%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png"),
-            checkout_paypal_path %>
-
 <%= shoppe_stripe_javascript %>
 
-<h2>Make your payment</h2>
+<%= render 'shared/page_title', title: "Make your payment" %>
 
 <% if params[:success] == "true" && params[:PayerID].present? %>
 
@@ -31,6 +26,7 @@
 
   <hr>
 
-  <%= link_to "Pay with PayPal", checkout_paypal_path %>
+  <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png"),
+            checkout_paypal_path %>
 
 <% end %>
